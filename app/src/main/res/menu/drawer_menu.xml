@@ -2,24 +2,45 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_chats"
-            android:title="@string/menu_chats" />
-        <item
-            android:id="@+id/nav_news"
-            android:title="@string/menu_news" />
-        <item
-            android:id="@+id/nav_portal"
-            android:title="@string/menu_portal" />
-        <item
-            android:id="@+id/nav_busSchedule"
-            android:title="@string/menu_busSchedule" />
-        <item
-            android:id="@+id/nav_settings"
-            android:title="@string/menu_Settings" />
-        <item
-            android:id="@+id/nav_logout"
-            android:title="@string/log_out" />
-    </group>
+    <item android:title="Messenger">
+        <menu>
+            <group
+                android:id="@+id/Messenger"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_chats"
+                    android:title="@string/menu_chats" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Website">
+        <menu>
+            <group android:id="@+id/Website">
+                <item
+                    android:id="@+id/nav_portal"
+                    android:title="@string/menu_portal" />
+                <item
+                    android:id="@+id/nav_news"
+                    android:title="@string/menu_news" />
+                <item
+                    android:id="@+id/nav_academicCalender"
+                    android:title="Academic Calender" />
+                <item
+                    android:id="@+id/nav_busSchedule"
+                    android:title="@string/menu_busSchedule" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Account">
+        <menu>
+            <group android:id="@+id/Account">
+                <item
+                    android:id="@+id/nav_settings"
+                    android:title="@string/menu_Settings" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="@string/log_out" />
+            </group>
+        </menu>
+    </item>
 </menu>

@@ -3,14 +3,19 @@ package com.example.miumessenger.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miumessenger.R;
 import com.example.miumessenger.databinding.ActivityMainBinding;
 import com.example.miumessenger.fragments.ChatsFragment;
+import com.example.miumessenger.fragments.PortalFragment;
 import com.example.miumessenger.fragments.SettingsFragment;
+import com.example.miumessenger.models.Users;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    private String navUserName, navEmail, navProfilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Logged Out",Toast.LENGTH_SHORT).show();
                     Intent intentSignIn = new Intent(MainActivity.this,SignInActivity.class);
                     startActivity(intentSignIn);
+                    finish();
                     break;
                 case R.id.nav_settings:
                     fragmentManager = getSupportFragmentManager();
@@ -79,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new ChatsFragment());
+                    fragmentTransaction.commit();
+                    break;
+                case R.id.nav_portal:
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new PortalFragment());
                     fragmentTransaction.commit();
                     break;
             }

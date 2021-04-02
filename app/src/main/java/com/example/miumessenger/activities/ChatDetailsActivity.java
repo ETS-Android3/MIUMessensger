@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.miumessenger.R;
 import com.example.miumessenger.databinding.ActivityChatDetailsBinding;
+import com.example.miumessenger.fragments.ChatsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,6 +47,17 @@ public class ChatDetailsActivity extends AppCompatActivity {
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar)
                 .into(binding.inboxProfilePic);
+
+
+        binding.backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatDetailsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
 
 

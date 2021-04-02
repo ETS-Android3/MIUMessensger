@@ -13,13 +13,15 @@ import android.widget.TextView;
 
 import com.example.miumessenger.R;
 import com.example.miumessenger.databinding.ActivityAppOppeningBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AppOpeningActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN=6000;
+    private static int SPLASH_SCREEN=5000;
     ActivityAppOppeningBinding binding;
     Animation bottomAnim, topAnim;
     ImageView image;
     TextView appName;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class AppOpeningActivity extends AppCompatActivity {
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.anim_opening_bottom);
         image = findViewById(R.id.oppeningLogo);
         appName = findViewById(R.id.oppeningAppName);
+        auth = FirebaseAuth.getInstance();
 
 
         image.setAnimation(topAnim);
@@ -39,9 +42,16 @@ public class AppOpeningActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(AppOpeningActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(auth.getCurrentUser() != null){
+                    Intent intent = new Intent(AppOpeningActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Intent intent = new Intent(AppOpeningActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         },SPLASH_SCREEN);
 

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#807C7C"
-    android:gravity="center"
+    android:background="@color/greenDark"
 
+    android:gravity="center"
     android:orientation="vertical"
     android:visibility="visible"
     tools:context=".activities.SignUpActivity">
@@ -18,7 +18,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:gravity="center|center_horizontal"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -32,7 +32,6 @@
             android:id="@+id/et_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:background="#FFFFFF"
             android:ems="10"
             android:hint="Your Name"
@@ -70,7 +69,7 @@
             android:gravity="right"
             android:padding="8dp"
             android:text="Already Have Account"
-            android:textColor="#0224FF"
+            android:textColor="#0077F6"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -82,6 +81,6 @@
             android:text="Sign Up"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:backgroundTint="#01963F" />
+            app:backgroundTint="#06A200" />
     </LinearLayout>
 </LinearLayout>

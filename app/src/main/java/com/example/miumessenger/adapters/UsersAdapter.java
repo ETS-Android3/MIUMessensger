@@ -5,16 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.miumessenger.R;
 import com.example.miumessenger.activities.ChatDetailsActivity;
+import com.example.miumessenger.databinding.SampleShowUserBinding;
 import com.example.miumessenger.models.Users;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,9 +35,9 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, int position) {
         Users users = usersArrayList.get(position);
-        Glide.with(context).load(users.getProfilePic()).placeholder(R.drawable.avatar)
-                .into(holder.image);
-        holder.userName.setText(users.getUserName());
+        Picasso.get().load(users.getProfilePic()).placeholder(R.drawable.avatar)
+                .into(holder.binding.inboxProfilePic);
+        holder.binding.userName.setText(users.getUserName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,18 +57,17 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView userName, lastMsg, lastMsgTime;
+//        ImageView image;
+//        TextView userName, lastMsg, lastMsgTime;
+        SampleShowUserBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.inboxProfilePic);
-            userName = itemView.findViewById(R.id.userName);
-            lastMsg = itemView.findViewById(R.id.lastMsg);
-            lastMsgTime = itemView.findViewById(R.id.lastMsgTime);
-
-
-
+            binding = SampleShowUserBinding.bind(itemView);
+//            image = itemView.findViewById(R.id.inboxProfilePic);
+//            userName = itemView.findViewById(R.id.userName);
+//            lastMsg = itemView.findViewById(R.id.lastMsg);
+//            lastMsgTime = itemView.findViewById(R.id.lastMsgTime);
         }
     }
 }
