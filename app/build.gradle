@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'//firebase storage
     implementation 'com.google.firebase:firebase-messaging'//message
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-messaging'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

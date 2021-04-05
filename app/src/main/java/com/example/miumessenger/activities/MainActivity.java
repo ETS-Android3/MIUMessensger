@@ -1,6 +1,5 @@
 package com.example.miumessenger.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,16 +11,14 @@ import com.example.miumessenger.databinding.ActivityMainBinding;
 import com.example.miumessenger.fragments.AcademicCalenderFragment;
 import com.example.miumessenger.fragments.ChatsFragment;
 import com.example.miumessenger.fragments.EventFragment;
+import com.example.miumessenger.fragments.GroupFragment;
 import com.example.miumessenger.fragments.NewsFragment;
 import com.example.miumessenger.fragments.NoticeFragment;
 import com.example.miumessenger.fragments.PortalFragment;
 import com.example.miumessenger.fragments.SettingsFragment;
-import com.example.miumessenger.models.Users;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -78,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            navEmail.setText(auth.getCurrentUser().getUid());
-
             drawer.closeDrawer(GravityCompat.START);
             switch (item.getItemId()){
                 case R.id.nav_logout:
@@ -97,12 +92,22 @@ public class MainActivity extends AppCompatActivity {
 
 
                      break;
-                case R.id.nav_chats:
+                case R.id.nav_idividual:
                     fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new ChatsFragment());
                     fragmentTransaction.commit();
                     break;
+
+                case R.id.nav_groups:
+//                    fragmentManager = getSupportFragmentManager();
+//                    fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_container, new GroupFragment());
+//                    fragmentTransaction.commit();
+                    Intent intent = new Intent(MainActivity.this, GroupChatActivity.class);
+                    startActivity(intent);
+                    break;
+
                 case R.id.nav_portal:
 
                     fragmentManager = getSupportFragmentManager();

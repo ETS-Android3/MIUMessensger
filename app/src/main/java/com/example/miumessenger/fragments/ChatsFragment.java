@@ -41,7 +41,7 @@ public class ChatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         binding = FragmentChatsBinding.inflate(inflater, container, false);
-        getActivity().setTitle(R.string.menu_chats);
+        getActivity().setTitle("Individual");
 
         UsersAdapter adapter = new UsersAdapter(usersArrayList , getContext());
         binding.chatsRecyclerView.setAdapter(adapter);
