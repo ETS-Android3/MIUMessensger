@@ -13,9 +13,16 @@ import com.example.miumessenger.R;
 import com.example.miumessenger.activities.ChatDetailsActivity;
 import com.example.miumessenger.databinding.SampleShowUserBinding;
 import com.example.miumessenger.models.Users;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>{
     Context context;
@@ -35,6 +42,33 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, int position) {
         Users users = usersArrayList.get(position);
+        String senderId = FirebaseAuth.getInstance().getUid();
+        String senderRoom = senderId + users.getUserId();
+        FirebaseDatabase.getInstance().getReference()
+                .child("chats")
+                .child(senderRoom)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String lastMsg = snapshot.child("lastMsg").getValue(String.class);
+                            long time = snapshot.child("lastMsgTime").getValue(Long.class);
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                            holder.binding.lastMsgTime.setText(dateFormat.format(new Date(time)));
+                            holder.binding.lastMsg.setText(lastMsg);
+                        }else{
+                            holder.binding.lastMsg.setText("Tap to chat");
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
         Picasso.get().load(users.getProfilePic()).placeholder(R.drawable.avatar)
                 .into(holder.binding.inboxProfilePic);
         holder.binding.userName.setText(users.getUserName());

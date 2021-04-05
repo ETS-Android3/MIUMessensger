@@ -23,6 +23,9 @@ public class Users {
         this.password = password;
 
     }
+    public Users(  String profilePic) {
+        this.profilePic = profilePic;
+    }
 
     public String getUserId() {
         return userId;
@@ -80,4 +83,5 @@ public class Users {
     public void setLastMsgTime(String lastMsgTime) {
         this.lastMsgTime = lastMsgTime;
     }
+
 }

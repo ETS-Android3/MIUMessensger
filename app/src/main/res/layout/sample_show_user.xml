@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="?selectableItemBackground">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/inboxProfilePic"
@@ -20,9 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
         android:text="Sample Name"
-        android:textColor="#01126C"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
         app:layout_constraintTop_toTopOf="@+id/inboxProfilePic" />
@@ -31,9 +33,11 @@
         android:id="@+id/lastMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="tap to chat"
-        android:textColor="#014C20"
-        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textColor="@color/cloud_grey"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@+id/userName"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
 
@@ -41,25 +45,39 @@
         android:id="@+id/lastMsgTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="12:00 am"
-        android:textAllCaps="true"
-        android:textColor="#8E04DE"
-        android:textSize="14sp"
-        android:textStyle="italic"
+        android:text="No Message"
+        android:textAllCaps="false"
+        android:textColor="@color/cloud_grey"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/black"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="#7D7977"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inboxProfilePic" />
+        app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
+        app:layout_constraintTop_toBottomOf="@+id/lastMsgTime" />
+
+    <TextView
+        android:id="@+id/activeStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Online"
+        android:textColor="@color/ufo_green"
+        android:textSize="10sp"
+        android:textStyle="bold|italic"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

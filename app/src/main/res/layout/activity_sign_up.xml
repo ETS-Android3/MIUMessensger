@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greenDark"
+    android:background="@color/green_dark"
 
     android:gravity="center"
     android:orientation="vertical"
@@ -69,7 +69,7 @@
             android:gravity="right"
             android:padding="8dp"
             android:text="Already Have Account"
-            android:textColor="#0077F6"
+            android:textColor="@color/blue"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -81,6 +81,6 @@
             android:text="Sign Up"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:backgroundTint="#06A200" />
+            app:backgroundTint="@color/ufo_green" />
     </LinearLayout>
 </LinearLayout>

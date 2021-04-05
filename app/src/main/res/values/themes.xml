@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MIUMessenger" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#008E07</item>
-        <item name="colorPrimaryVariant">#017306</item>
+        <item name="colorPrimary">#044941</item>
+        <item name="colorPrimaryVariant">#044941</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

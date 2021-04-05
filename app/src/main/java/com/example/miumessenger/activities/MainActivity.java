@@ -1,5 +1,6 @@
 package com.example.miumessenger.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,13 +9,18 @@ import android.widget.Toast;
 
 import com.example.miumessenger.R;
 import com.example.miumessenger.databinding.ActivityMainBinding;
+import com.example.miumessenger.fragments.AcademicCalenderFragment;
 import com.example.miumessenger.fragments.ChatsFragment;
+import com.example.miumessenger.fragments.EventFragment;
+import com.example.miumessenger.fragments.NewsFragment;
+import com.example.miumessenger.fragments.NoticeFragment;
 import com.example.miumessenger.fragments.PortalFragment;
 import com.example.miumessenger.fragments.SettingsFragment;
 import com.example.miumessenger.models.Users;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -33,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
     FirebaseAuth auth;
+    FirebaseDatabase database;
     ActivityMainBinding binding;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private String navUserName, navEmail, navProfilePic;
+    TextView navUserName, navEmail, navProfilePic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         auth = FirebaseAuth.getInstance();
+        navEmail = findViewById(R.id.nav_userEmail);
+        navUserName = findViewById(R.id.nav_userName);
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            navEmail.setText(auth.getCurrentUser().getUid());
+
             drawer.closeDrawer(GravityCompat.START);
             switch (item.getItemId()){
                 case R.id.nav_logout:
@@ -89,9 +104,38 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.commit();
                     break;
                 case R.id.nav_portal:
+
                     fragmentManager = getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new PortalFragment());
+                    fragmentTransaction.commit();
+                    break;
+                case R.id.nav_news:
+
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new NewsFragment());
+                    fragmentTransaction.commit();
+                    break;
+                case R.id.nav_academicCalender:
+
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new AcademicCalenderFragment());
+                    fragmentTransaction.commit();
+                    break;
+                case R.id.nav_notice:
+
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new NoticeFragment());
+                    fragmentTransaction.commit();
+                    break;
+                case R.id.nav_events:
+
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, new EventFragment());
                     fragmentTransaction.commit();
                     break;
             }

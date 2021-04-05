@@ -1,16 +1,15 @@
 package com.example.miumessenger.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
@@ -18,21 +17,21 @@ import com.example.miumessenger.R;
 import com.example.miumessenger.databinding.FragmentWebBinding;
 
 
-public class PortalFragment extends Fragment {
+public class AcademicCalenderFragment extends Fragment {
 
-
-
-    public PortalFragment() {
+    public AcademicCalenderFragment() {
 
     }
 
     FragmentWebBinding binding;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentWebBinding.inflate(inflater, container, false);
-        getActivity().setTitle("Portal");
+        getActivity().setTitle("Academic Calender");
+
         WebSettings webSettings;
         webSettings = binding.portalView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -46,8 +45,9 @@ public class PortalFragment extends Fragment {
         webSettings.setSavePassword(true);
         webSettings.setSaveFormData(true);
         webSettings.setEnableSmoothTransition(true);
-        binding.portalView.loadUrl("http://miuportal.manarat.ac.bd/Security/Login.aspx");
+        binding.portalView.loadUrl("https://drive.google.com/file/d/1Ihh1g9STK9dzaHPCKZfAzNMdD4eijPxx/view?usp=sharing");
         binding.portalView.setWebViewClient(new WebViewClient());
+
 
         binding.forwordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,5 +82,4 @@ public class PortalFragment extends Fragment {
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
-
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.miumessenger.R;
 import com.example.miumessenger.adapters.UsersAdapter;
@@ -47,6 +48,7 @@ public class ChatsFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatsRecyclerView.setLayoutManager(layoutManager);
+        binding.chatsRecyclerView.showShimmerAdapter();
 
         database.getReference().child("users").addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,9 +57,13 @@ public class ChatsFragment extends Fragment {
                 for(DataSnapshot  datasnapshot : snapshot.getChildren()){
                     Users users = datasnapshot.getValue(Users.class);
                     users.setUserId(datasnapshot.getKey());
-                    usersArrayList.add(users);
+                    if(!users.getUserId().equals(FirebaseAuth.getInstance().getUid())){
+                        usersArrayList.add(users);
+                    }
+
 
                 }
+                binding.chatsRecyclerView.hideShimmerAdapter();
                 adapter.notifyDataSetChanged();
 
 
@@ -69,10 +75,20 @@ public class ChatsFragment extends Fragment {
             }
         });
 
-
-
-
-
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Online");
+    }
+
+    @Override
+     public void onPause() {
+        super.onPause();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Offline");
     }
 }

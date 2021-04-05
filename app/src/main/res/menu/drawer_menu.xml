@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?selectableItemBackground">
 
     <item android:title="Messenger">
         <menu>
@@ -23,11 +24,18 @@
                     android:id="@+id/nav_news"
                     android:title="@string/menu_news" />
                 <item
-                    android:id="@+id/nav_academicCalender"
-                    android:title="Academic Calender" />
+                    android:id="@+id/nav_notice"
+                    android:title="Notice" />
+                <item
+                    android:id="@+id/nav_events"
+                    android:title="Events" />
                 <item
                     android:id="@+id/nav_busSchedule"
                     android:title="@string/menu_busSchedule" />
+                <item
+                    android:id="@+id/nav_academicCalender"
+                    android:title="Academic Calender" />
+
             </group>
         </menu>
     </item>
