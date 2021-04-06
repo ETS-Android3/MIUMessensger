@@ -1,5 +1,6 @@
     package com.example.miumessenger.adapters;
 
+    import android.app.AlertDialog;
     import android.content.Context;
     import android.view.LayoutInflater;
     import android.view.MotionEvent;
@@ -10,6 +11,7 @@
     import androidx.recyclerview.widget.RecyclerView;
 
     import com.bumptech.glide.Glide;
+    import com.example.miumessenger.databinding.DeleteDialogBinding;
     import com.example.miumessenger.models.Messages;
     import com.example.miumessenger.R;
     import com.example.miumessenger.databinding.ItemReceiverBinding;
@@ -141,6 +143,60 @@
                         return false;
                     }
                 });
+                viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null);
+                        DeleteDialogBinding binding = DeleteDialogBinding.bind(view);
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Delete Message")
+                                .setView(binding.getRoot())
+                                .create();
+
+                        binding.everyone.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                message.setMessage("This message is removed.");
+                                message.setFeeling(-1);
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(senderRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(message);
+
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(receiverRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(message);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        binding.delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(senderRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(null);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        binding.cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+
+                        return false;
+                    }
+                });
             }else{
                 ReceiverViewHolder viewHolder = (ReceiverViewHolder)holder;
                 viewHolder.binding.message.setText(message.getMessage());
@@ -175,6 +231,60 @@
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         popup.onTouch(v,event);
+                        return false;
+                    }
+                });
+                viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null);
+                        DeleteDialogBinding binding = DeleteDialogBinding.bind(view);
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Delete Message")
+                                .setView(binding.getRoot())
+                                .create();
+
+                        binding.everyone.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                message.setMessage("This message is removed.");
+                                message.setFeeling(-1);
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(senderRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(message);
+
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(receiverRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(message);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        binding.delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("chats")
+                                        .child(senderRoom)
+                                        .child("messages")
+                                        .child(message.getMessageId()).setValue(null);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        binding.cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+
                         return false;
                     }
                 });
