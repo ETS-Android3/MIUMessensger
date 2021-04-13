@@ -30,7 +30,7 @@
                 app:srcCompat="@drawable/abc_vector_test" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/inboxProfilePic"
+                android:id="@+id/userProfilePic"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="2dp"
@@ -51,7 +51,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
+                app:layout_constraintStart_toEndOf="@+id/userProfilePic"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:textSize="8sp"
                 android:textStyle="bold"
                 android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
+                app:layout_constraintStart_toEndOf="@+id/userProfilePic"
                 app:layout_constraintTop_toBottomOf="@+id/userName" />
 
             <ImageView

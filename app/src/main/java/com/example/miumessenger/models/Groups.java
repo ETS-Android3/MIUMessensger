@@ -2,19 +2,24 @@ package com.example.miumessenger.models;
 
 public class Groups {
 
-    private static String groupName;
+    String groupName;
     String  profilePic, userName, email, password,userId,lastMsg,lastMsgTime;
 
     public Groups(String groupName, String userName, String lastMsg, String lastMsgTime) {
-        Groups.groupName = groupName;
         this.userName = userName;
         this.lastMsg = lastMsg;
         this.lastMsgTime = lastMsgTime;
+        this.groupName = groupName;
     }
 
 
 
+
     public Groups(){
+
+    }
+    public Groups(String groupName){
+        this.groupName = groupName;
 
     }
 
@@ -35,16 +40,14 @@ public class Groups {
 
     }
 
-    public static String getGroupName() {
+    public String getGroupName() {
         return groupName;
     }
 
     public void setGroupName(String groupName) {
-        Groups.groupName = groupName;
+        this.groupName = groupName;
     }
-    public Groups(String profilePic) {
-        this.profilePic = profilePic;
-    }
+
 
     public String getUserId() {
         return userId;

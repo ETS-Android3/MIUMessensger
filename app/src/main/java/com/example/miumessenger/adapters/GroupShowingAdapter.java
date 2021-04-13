@@ -16,6 +16,7 @@ import com.example.miumessenger.activities.GroupChatActivity;
 import com.example.miumessenger.databinding.SampleShowGroupBinding;
 import com.example.miumessenger.databinding.SampleShowUserBinding;
 import com.example.miumessenger.models.Groups;
+import com.example.miumessenger.models.Messages;
 import com.example.miumessenger.models.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +32,7 @@ import java.util.Date;
 public class GroupShowingAdapter extends  RecyclerView.Adapter<GroupShowingAdapter.ViewHolder>{
     Context context;
     ArrayList<Groups> groupsArrayList;
+
     public GroupShowingAdapter(ArrayList<Groups> groupsArrayList, Context context){
         this.context= context;
         this.groupsArrayList = groupsArrayList;
@@ -71,7 +73,7 @@ public class GroupShowingAdapter extends  RecyclerView.Adapter<GroupShowingAdapt
                     }
                 });
 
-        holder.binding.groupName.setText(Groups.getGroupName());
+        holder.binding.groupName.setText(group.getGroupName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,17 +7,25 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.miumessenger.R;
 import com.example.miumessenger.models.Users;
 import com.example.miumessenger.databinding.ActivitySignUpBinding;
 import com.github.pgreze.reactions.ReactionViewState;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.Tag;
 
 public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding binding;
@@ -33,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
 
         dialog = new ProgressDialog(SignUpActivity.this);
         dialog.setTitle("Creating Account ");
@@ -66,20 +75,39 @@ public class SignUpActivity extends AppCompatActivity {
 
                                     if (task.isSuccessful()) {
                                         dialog.dismiss();
-                                        Users user = new Users(binding.etUserName.getText().toString(), binding.etEmail.getText().toString(),binding.etPassword.getText().toString());
-                                        String id = task.getResult().getUser().getUid();
+                                        //verify account
+//                                        FirebaseUser fUser = auth.getCurrentUser();
+//                                        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                            @Override
+//                                            public void onSuccess(Void aVoid) {
+//                                                Toast.makeText(SignUpActivity.this,"Verification email has been sent!",Toast.LENGTH_SHORT).show();
+//
+//                                            }
+//
+//                                        }).addOnFailureListener(new OnFailureListener() {
+//
+//                                            @Override
+//                                            public void onFailure(@NonNull Exception e) {
+//                                                Toast.makeText(SignUpActivity.this,"onFailure: Email not sent " + e.getMessage(),Toast.LENGTH_SHORT).show();
+//
+//                                            }
+//                                        });
 
-                                        database.getReference().child("users").child(id).setValue(user);
-                                        Toast.makeText(SignUpActivity.this,
-                                                "Account Created Successfully", Toast.LENGTH_SHORT).show();
 
-                                        new Handler().postDelayed(new Runnable() {
-                                            public void run() {
-                                                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }, 3000);
+                                            Users user = new Users(binding.etUserName.getText().toString(), binding.etEmail.getText().toString(),binding.etPassword.getText().toString());
+                                            String id = task.getResult().getUser().getUid();
+
+                                            database.getReference().child("users").child(id).setValue(user);
+                                            Toast.makeText(SignUpActivity.this,
+                                                    "Account Created Successfully", Toast.LENGTH_SHORT).show();
+
+                                            new Handler().postDelayed(new Runnable() {
+                                                public void run() {
+                                                    Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }, 4500);
 
 
                                     } else {

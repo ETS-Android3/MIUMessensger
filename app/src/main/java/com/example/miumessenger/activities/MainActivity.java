@@ -3,22 +3,31 @@ package com.example.miumessenger.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miumessenger.R;
+import com.example.miumessenger.adapters.UsersAdapter;
 import com.example.miumessenger.databinding.ActivityMainBinding;
+import com.example.miumessenger.databinding.DrawerHeaderBinding;
 import com.example.miumessenger.fragments.AcademicCalenderFragment;
 import com.example.miumessenger.fragments.ChatsFragment;
 import com.example.miumessenger.fragments.EventFragment;
-import com.example.miumessenger.fragments.GroupFragment;
 import com.example.miumessenger.fragments.NewsFragment;
 import com.example.miumessenger.fragments.NoticeFragment;
 import com.example.miumessenger.fragments.PortalFragment;
 import com.example.miumessenger.fragments.SettingsFragment;
+import com.example.miumessenger.models.Users;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -40,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    TextView navUserName, navEmail, navProfilePic;
+    DrawerHeaderBinding bind;
 
 
     @Override
@@ -51,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         auth = FirebaseAuth.getInstance();
-        navEmail = findViewById(R.id.nav_userEmail);
-        navUserName = findViewById(R.id.nav_userName);
+        database = FirebaseDatabase.getInstance();
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -60,6 +68,29 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        View header= navigationView.getHeaderView(0);
+        database.getReference().child("users").child(FirebaseAuth.getInstance().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Users user = snapshot.getValue(Users.class);
+                        ImageView userProfilePic = header.findViewById(R.id.userProfilePic);
+                        TextView userName = header.findViewById(R.id.userName);
+                        TextView userEmail = header.findViewById(R.id.userEmail);
+                        TextView about = header.findViewById(R.id.about);
+
+                            userName.setText(user.getUserName());
+                            userEmail.setText(user.getEmail());
+                            about.setText(user.getAbout());
+                            Picasso.get().load(user.getProfilePic()).placeholder(R.drawable.avatar).into(userProfilePic);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -89,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, new SettingsFragment());
                     fragmentTransaction.commit();
+
 
 
                      break;
@@ -149,6 +181,18 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
+    }
+    protected void onResume() {
+        super.onResume();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Offline");
     }
 
 

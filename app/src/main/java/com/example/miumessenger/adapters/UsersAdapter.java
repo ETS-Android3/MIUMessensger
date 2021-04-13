@@ -27,6 +27,7 @@ import java.util.Date;
 public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>{
     Context context;
     ArrayList<Users> usersArrayList;
+    FirebaseAuth auth;
     public UsersAdapter( ArrayList<Users> usersArrayList, Context context){
         this.context= context;
         this.usersArrayList = usersArrayList;
@@ -42,6 +43,7 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, int position) {
         Users users = usersArrayList.get(position);
+        auth = FirebaseAuth.getInstance();
         String senderId = FirebaseAuth.getInstance().getUid();
         String senderRoom = senderId + users.getUserId();
         FirebaseDatabase.getInstance().getReference()
@@ -68,10 +70,12 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
 
                     }
                 });
+        
 
         Picasso.get().load(users.getProfilePic()).placeholder(R.drawable.avatar)
-                .into(holder.binding.inboxProfilePic);
+                .into(holder.binding.userProfilePic);
         holder.binding.userName.setText(users.getUserName());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,18 +94,12 @@ public class UsersAdapter extends  RecyclerView.Adapter<UsersAdapter.ViewHolder>
         return usersArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-//        ImageView image;
-//        TextView userName, lastMsg, lastMsgTime;
-        SampleShowUserBinding binding;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        SampleShowUserBinding binding;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = SampleShowUserBinding.bind(itemView);
-//            image = itemView.findViewById(R.id.inboxProfilePic);
-//            userName = itemView.findViewById(R.id.userName);
-//            lastMsg = itemView.findViewById(R.id.lastMsg);
-//            lastMsgTime = itemView.findViewById(R.id.lastMsgTime);
         }
     }
 }

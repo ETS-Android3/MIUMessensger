@@ -1,13 +1,30 @@
 package com.example.miumessenger.models;
 
 public class Users {
-    String profilePic, userName, email, password,userId,lastMsg,lastMsgTime;
+    String profilePic;
+    String userName;
+    String email;
+    String password;
+    String userId;
+    String lastMsg;
+    String lastMsgTime;
+    String about;
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+
 
     public Users(){
 
     }
 
-    public Users(String profilePic, String userName, String email, String password, String userId, String lastMsg, String lastMsgTime) {
+    public Users(String profilePic, String userName, String email, String password, String userId, String lastMsg, String lastMsgTime, String about) {
         this.profilePic = profilePic;
         this.userName = userName;
         this.email = email;
@@ -15,7 +32,10 @@ public class Users {
         this.userId = userId;
         this.lastMsg = lastMsg;
         this.lastMsgTime = lastMsgTime;
+        this.about = about;
     }
+
+
     //SignUp constructor
     public Users( String userName, String email, String password) {
         this.userName = userName;

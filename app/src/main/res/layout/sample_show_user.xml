@@ -8,7 +8,7 @@
     android:background="?selectableItemBackground">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/inboxProfilePic"
+        android:id="@+id/userProfilePic"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:src="@drawable/avatar"
@@ -26,8 +26,8 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
-        app:layout_constraintTop_toTopOf="@+id/inboxProfilePic" />
+        app:layout_constraintStart_toEndOf="@+id/userProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/userProfilePic" />
 
     <TextView
         android:id="@+id/lastMsg"
@@ -62,7 +62,7 @@
         android:layout_marginTop="8dp"
         android:background="#7D7977"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/inboxProfilePic"
+        app:layout_constraintStart_toEndOf="@+id/userProfilePic"
         app:layout_constraintTop_toBottomOf="@+id/lastMsgTime" />
 
     <TextView

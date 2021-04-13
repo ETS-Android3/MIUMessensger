@@ -49,7 +49,7 @@ public class GroupChatActivity extends AppCompatActivity {
         binding =ActivityGroupChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().setTitle("MIU");
+        getSupportActionBar().setTitle("Manarat International University");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         senderUid = FirebaseAuth.getInstance().getUid();

@@ -102,7 +102,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
 
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar)
-                .into(binding.inboxProfilePic);
+                .into(binding.userProfilePic);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
 

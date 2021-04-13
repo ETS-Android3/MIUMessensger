@@ -7,6 +7,9 @@ public class Messages {
 
     public Messages(){
 
+    }public Messages(String messageId){
+        this.messageId = messageId;
+
     }
 
     public Messages(String message, String senderId, long timestamp) {
