@@ -10,6 +10,9 @@
  
 </p>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78319150/112051588-51d43780-8b7c-11eb-852a-4801afc10c38.png">
+</p>
 
 <h1 align="center"> Download  MIU Messenger Application(APK) for Android Device: </h1>
 
